@@ -1,0 +1,91 @@
+﻿@model ModelEF.Product
+@using TestUngDung.Areas.Admin.Data;
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Bạn có muốn xoá sản phẩm @Html.DisplayFor(model => model.Name)</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content container-fluid">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Index")'">Trở về danh sách</button>
+                </div>
+
+                <div class="col-md-12">
+                    <table class="table table-striped table-hover text-center">
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>
+                                Tên sản phẩm
+                            </th>
+                            <th>
+                                Đơn giá
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Loại sản phẩm
+                            </th>
+                            <th>
+                                Mô tả
+                            </th>
+                            <th>
+                                Tình trạng
+                            </th>
+                            <th>
+                                Hình ảnh
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(model => model.Id)</td>
+                            <td>@Html.DisplayFor(model => model.Name)</td>
+                            <td>@Html.DisplayFor(model => model.UnitCost) VNĐ</td>
+                            <td> @Html.DisplayFor(model => model.Quantity) </td>
+                            <td> @Html.DisplayFor(model => model.Category.Name)</td>
+                            <td>@Html.DisplayFor(model => model.Description)</td>
+                            <td>@Html.DisplayFor(model => model.Status)</td>
+                            <td>
+                                @Html.Image("../../../../" + Model.Image, "alt", "100")
+                            </td>
+                        </tr>
+                    </table>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+
+</div>

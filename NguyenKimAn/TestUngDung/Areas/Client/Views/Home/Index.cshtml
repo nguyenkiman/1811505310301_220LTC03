@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ModelEF.Product>
+@using TestUngDung.Areas.Admin.Data
+@using System.Linq
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+@*<div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3" style="background-color: lavender; margin-top: 5px; text-align: center">
+                <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                @Html.Image("../" + item.Image, "alt", "100") <br />
+                @Html.DisplayFor(modelItem => item.UnitCost) <br />
+                <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Products", new {id = item.Id })">Xem chi tiết</a>
+            </div>
+        }
+    </div>*@
+<div class="container tags">
+    <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ion-arrow-down-b"></i> Sorting by name
+        </button>
+        <ul class="dropdown-menu">
+            <li class="active"><a href="#"> <i class="ion-arrow-down-c"></i> Name [A-Z]</a></li>
+            <li><a href="#"> <i class="ion-arrow-up-c"></i> Name [Z-A]</a></li>
+            <li><a href="#"> <i class="ion-arrow-down-c"></i> Price [Low-High]</a></li>
+            <li><a href="#"> <i class="ion-arrow-up-c"></i> Price [High-Low]</a></li>
+        </ul>
+    </div>
+
+    <p>Search by tags</p>
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-default btn-xs active">
+            <input type="radio" name="options" id="option1" checked> All products
+        </label>
+        <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option2"> Business
+        </label>
+        <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option3"> Home
+        </label>
+        <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option4"> Mobility
+        </label>
+        <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option5"> Powerfull
+        </label>
+        <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option6"> Gaming
+        </label>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- Products -->
+        <div class="col-sm-12 products">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 col-md-4 product">
+                        <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+                        <a href="./">@Html.Image("../../../../" + item.Image, "alt", "100")</a>
+
+                        <div class="content">
+                            <h1 class="h4">@Html.DisplayFor(modelItem => item.Name)</h1>
+                            <p class="price">@Html.DisplayFor(modelItem => item.UnitCost)</p>
+                            <label>@Html.DisplayFor(modelItem => item.Category.Name)</label>
+
+                            <a href="@Url.Action("Details", "Products", new {id = item.Id })" class="btn btn-link"> Details</a>
+                            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true"><i class="ion-ios-arrow-left"></i></span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li class="disabled"><a href="#">..</a></li>
+                    <li><a href="#">10</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true"><i class="ion-ios-arrow-right"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- /// -->
+    </div>
+</div>
+

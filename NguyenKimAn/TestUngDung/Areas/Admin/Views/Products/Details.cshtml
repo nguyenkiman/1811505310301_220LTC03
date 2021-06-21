@@ -1,0 +1,104 @@
+﻿@model ModelEF.Product
+@using TestUngDung.Areas.Admin.Data;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Thông tin sản phẩm</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Index")'">Trở về danh sách</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Category.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Category.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UnitCost)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UnitCost)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Quantity)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+
+                    <dd>
+                        @Html.Image("../../../../" + Model.Image, "alt", "100")
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </dt>
+                    @if (Model.Status == 1)
+                    {
+                        <dd>Actived</dd>
+                    }
+                    else
+                    {
+                        <dd>Blocked</dd>
+                    }
+
+
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+    </section>
+ </div>
+        

@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<ModelEF.UserAccount>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Danh sách người dùng</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                @using (Html.BeginForm("Index", "UserAccounts", FormMethod.Get))
+                {
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 offset-4">
+                                <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+            <script>
+                $('#AlertBox').removeClass('hide');
+                $('#AlertBox').delay(3000).slideUp(500);
+            </script>
+
+            <div class="col-md-12">
+                <table class="table table-striped table-hover text-center">
+                    <tr>
+                        <th>STT</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().UserName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Passwords)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    @{ var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                <tr id="row_@item.Id">
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.Passwords
+                    </td>
+                    @if (item.Status == 1)
+                    {
+                        <td>Actived</td>
+                        <td>
+                            @Html.ActionLink("Block", "Delete", new { id = item.Id })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>Blocked</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    }
+
+
+                </tr>
+                        i++;
+                    }
+
+                </table>
+            </div>
+            <div class="col-md-12">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+
